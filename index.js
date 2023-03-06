@@ -12,11 +12,11 @@ const port = process.env.PORT || 5000;
 
 
 
-var serviceAccount = require("./tourism-planner-29a5f-firebase-adminsdk-fryj0-116d2c0e22.json");
+// var serviceAccount = require("./tourism-planner-29a5f-firebase-adminsdk-fryj0-116d2c0e22.json");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
 
 
 // middleware
@@ -27,19 +27,19 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-async function verifyToken(req, res, next) {
-    if (req.headers?.authorization?.startsWith('Bearer ')) {
-        const idToken = req.headers.authorization.split('Bearer ')[1];
-        try {
-            const decodedUser = await admin.auth().verifyIdToken(idToken);
-            req.decodedUserEmail = decodedUser.email;
-        }
-        catch {
+// async function verifyToken(req, res, next) {
+//     if (req.headers?.authorization?.startsWith('Bearer ')) {
+//         const idToken = req.headers.authorization.split('Bearer ')[1];
+//         try {
+//             const decodedUser = await admin.auth().verifyIdToken(idToken);
+//             req.decodedUserEmail = decodedUser.email;
+//         }
+//         catch {
 
-        }
-    }
-    next();
-}
+//         }
+//     }
+//     next();
+// }
 
 async function run() {
     try {
@@ -78,15 +78,15 @@ async function run() {
         // Add Orders API
         app.get('/booked_service', verifyToken, async (req, res) => {
             const email = req.query.email;
-            if (req.decodedUserEmail === email) {
+            // if (req.decodedUserEmail === email) {
                 const query = { email: email };
                 const cursor = orderCollection.find(query);
                 const orders = await cursor.toArray();
                 res.json(orders);
-            }
-            else {
-                res.status(401).json({ message: 'User not authorized' })
-            }
+            // }
+            // else {
+            //     res.status(401).json({ message: 'User not authorized' })
+            // }
 
         });
 
