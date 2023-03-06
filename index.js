@@ -76,9 +76,9 @@ async function run() {
         });
 
         // Add Orders API
-        app.get('/booked_service', verifyToken, async (req, res) => {
+        app.get('/booked_service',  async (req, res) => {
             const email = req.query.email;
-            // if (req.decodedUserEmail === email) {
+            // if (req.decodedUserEmail === email), verifyToken, {
                 const query = { email: email };
                 const cursor = orderCollection.find(query);
                 const orders = await cursor.toArray();
