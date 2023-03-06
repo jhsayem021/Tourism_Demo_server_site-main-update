@@ -112,8 +112,8 @@ async function run() {
 
         app.post('/services', async (req, res) => {
             const keys = req.body;
-            // const query = { key: { $in: keys } }
-            const products = await productCollection.insertOne(keys);
+            const query = { key: { $in: keys } }
+            const products = await productCollection.insertOne(query);
             res.json(products);
         });
 
