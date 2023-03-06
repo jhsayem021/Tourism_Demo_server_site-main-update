@@ -12,7 +12,7 @@ const port = process.env.PORT || 5000;
 
 
 
-var serviceAccount = require("./sa-tourism-planner-firebase-adminsdk-jelyc-cc93fd486e (1).json");
+var serviceAccount = require("./tourism-planner-29a5f-firebase-adminsdk-fryj0-116d2c0e22.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
